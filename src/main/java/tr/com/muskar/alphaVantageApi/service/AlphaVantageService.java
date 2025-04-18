@@ -9,10 +9,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import tr.com.muskar.alphaVantageApi.model.enums.StockTimePeriod;
 import tr.com.muskar.alphaVantageApi.model.gainersLosers.StockDataDto;
-import tr.com.muskar.alphaVantageApi.model.globalQuote.GlobalQuoteDto;
-import tr.com.muskar.alphaVantageApi.model.historicalOptions.HistoricalOptionsResponse;
-import tr.com.muskar.alphaVantageApi.model.incomeStatements.CompanyFinancials;
-import tr.com.muskar.alphaVantageApi.model.insiderTransactions.InsiderTransactionResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +42,7 @@ public class AlphaVantageService {
             }
 
         } catch (Exception e) {
-            log.error(e.getMessage() + " when requesting TOP_GAINERS_LOSERS");
+            log.error("{} when requesting TOP_GAINERS_LOSERS", e.getMessage());
         }
         return stockDataDto;
     }
@@ -67,7 +63,7 @@ public class AlphaVantageService {
                 result = response.getBody();
             }
         }catch (Exception e){
-            log.error(e.getMessage()+" when requesting TIME_SERIES_DAILY");
+            log.error("{} when requesting TIME_SERIES_DAILY", e.getMessage());
         }
         return result;
     }
@@ -82,7 +78,7 @@ public class AlphaVantageService {
                 result = response.getBody();
             }
         }catch (Exception e){
-            log.error(e.getMessage()+" when requesting TIME_SERIES_INTRADAY");
+            log.error("{} when requesting TIME_SERIES_INTRADAY", e.getMessage());
         }
         return result;
     }
@@ -98,7 +94,7 @@ public class AlphaVantageService {
                 return response.getBody();
             }
         } catch (Exception e) {
-            log.error("Error fetching data for function: " + function + " -> " + e.getMessage());
+            log.error("Error fetching data for function: {} -> {}", function, e.getMessage());
         }
 
         return null;
